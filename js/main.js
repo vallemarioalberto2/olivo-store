@@ -46,7 +46,7 @@ const $ = (sel) => document.querySelector(sel);
 const escapeAttr = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 function mediaHTML(p) {
   if (!p.img) return ICONS[p.cat];
-  return `<img src="${escapeAttr(p.img)}" alt="${escapeAttr(p.name)}" data-cat="${p.cat}" loading="lazy" decoding="async" />`;
+  return `<img src="${escapeAttr(p.img)}" alt="${escapeAttr(p.name)}" data-cat="${p.cat}" decoding="async" />`;
 }
 
 // Si una imagen no carga (archivo faltante o ruta mal escrita), se muestra el ícono

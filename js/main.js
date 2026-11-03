@@ -5,7 +5,7 @@
 // ---------- Configuración de WhatsApp ----------
 // Número en formato internacional, solo dígitos: 52 + lada y número a 10 dígitos.
 // Ejemplo: "525512345678". Cámbialo por el número real de la tienda.
-const WHATSAPP_NUMBER = "520000000000";
+const WHATSAPP_NUMBER = "527561152160";
 
 // Catálogo de ejemplo (reemplazar por datos reales o una API)
 //

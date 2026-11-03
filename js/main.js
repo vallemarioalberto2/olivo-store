@@ -14,18 +14,18 @@ const WHATSAPP_NUMBER = "520000000000";
 //   2. Escribe su ruta en el campo "img" (respeta mayúsculas, minúsculas y la extensión).
 // Si "img" está vacío o el archivo no existe, se muestra un ícono de la categoría.
 const PRODUCTS = [
-  { id: 1,  name: "Collar Hoja de Olivo",     cat: "collares", price: 349, tone: "#E8EDD9", badge: "Nuevo", img: "img/productos/olivo1.png" },
-  { id: 2,  name: "Collar Luna Dorada",       cat: "collares", price: 289, tone: "#F3E8CF", img: "img/productos/olivo2.png" },
-  { id: 3,  name: "Collar Perla Natural",     cat: "collares", price: 419, tone: "#DDE2CC", img: "img/productos/olivo3.png" },
-  { id: 4,  name: "Aretes Argolla Fina",      cat: "aretes",   price: 199, tone: "#F3E8CF", badge: "Top",   img: "img/productos/olivo4.png" },
-  { id: 5,  name: "Aretes Gota Olivo",        cat: "aretes",   price: 259, tone: "#E8EDD9", img: "img/productos/olivo1.png" },
-  { id: 6,  name: "Aretes Botón Perla",       cat: "aretes",   price: 179, tone: "#DDE2CC", img: "img/productos/olivo2.png" },
-  { id: 7,  name: "Pulsera Cadena Sutil",     cat: "pulseras", price: 229, tone: "#E8EDD9", img: "img/productos/olivo3.png" },
-  { id: 8,  name: "Pulsera Trenzada",         cat: "pulseras", price: 189, tone: "#F3E8CF", badge: "Nuevo", img: "img/productos/olivo4.png" },
-  { id: 9,  name: "Pulsera Dijes Hojas",      cat: "pulseras", price: 319, tone: "#DDE2CC", img: "img/productos/olivo1.png" },
-  { id: 10, name: "Anillo Minimal Dorado",    cat: "anillos",  price: 159, tone: "#F3E8CF", img: "img/productos/olivo2.png" },
-  { id: 11, name: "Anillo Piedra Verde",      cat: "anillos",  price: 279, tone: "#E8EDD9", badge: "Top",   img: "img/productos/olivo3.png" },
-  { id: 12, name: "Set de Anillos Apilables", cat: "anillos",  price: 349, tone: "#DDE2CC", img: "img/productos/olivo4.png" }
+  { id: 1,  name: "Collar Hoja de Olivo",     cat: "collares", price: 349, tone: "#E8EDD9", badge: "Nuevo", img: "img/productos/olivo1.jpeg" },
+  { id: 2,  name: "Collar Luna Dorada",       cat: "collares", price: 289, tone: "#F3E8CF", img: "img/productos/olivo2.jpeg" },
+  { id: 3,  name: "Collar Perla Natural",     cat: "collares", price: 419, tone: "#DDE2CC", img: "img/productos/olivo3.jpeg" },
+  { id: 4,  name: "Aretes Argolla Fina",      cat: "aretes",   price: 199, tone: "#F3E8CF", badge: "Top",   img: "img/productos/olivo4.jpg" },
+  { id: 5,  name: "Aretes Gota Olivo",        cat: "aretes",   price: 259, tone: "#E8EDD9", img: "img/productos/olivo1.jpeg" },
+  { id: 6,  name: "Aretes Botón Perla",       cat: "aretes",   price: 179, tone: "#DDE2CC", img: "img/productos/olivo2.jpeg" },
+  { id: 7,  name: "Pulsera Cadena Sutil",     cat: "pulseras", price: 229, tone: "#E8EDD9", img: "img/productos/olivo3.jpeg" },
+  { id: 8,  name: "Pulsera Trenzada",         cat: "pulseras", price: 189, tone: "#F3E8CF", badge: "Nuevo", img: "img/productos/olivo4.jpg" },
+  { id: 9,  name: "Pulsera Dijes Hojas",      cat: "pulseras", price: 319, tone: "#DDE2CC", img: "img/productos/olivo1.jpeg" },
+  { id: 10, name: "Anillo Minimal Dorado",    cat: "anillos",  price: 159, tone: "#F3E8CF", img: "img/productos/olivo2.jpeg" },
+  { id: 11, name: "Anillo Piedra Verde",      cat: "anillos",  price: 279, tone: "#E8EDD9", badge: "Top",   img: "img/productos/olivo3.jpeg" },
+  { id: 12, name: "Set de Anillos Apilables", cat: "anillos",  price: 349, tone: "#DDE2CC", img: "img/productos/olivo4.jpg" }
 ];
 
 // Íconos SVG simples por categoría (se usan cuando un producto aún no tiene foto)

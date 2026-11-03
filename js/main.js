@@ -5,7 +5,7 @@
 // ---------- Configuración de WhatsApp ----------
 // Número en formato internacional, solo dígitos: 52 + lada y número a 10 dígitos.
 // Ejemplo: "525512345678". Cámbialo por el número real de la tienda.
-const WHATSAPP_NUMBER = "527561152160";
+const WHATSAPP_NUMBER = "520000000000";
 
 // Catálogo de ejemplo (reemplazar por datos reales o una API)
 //
@@ -44,18 +44,45 @@ const $ = (sel) => document.querySelector(sel);
 
 // Foto del producto; si no hay imagen, usa el ícono de la categoría
 const escapeAttr = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
-function mediaHTML(p) {
+// queued = true: la foto no se descarga sola; la descarga loadImagesInOrder() por turnos.
+function mediaHTML(p, queued = false) {
   if (!p.img) return ICONS[p.cat];
-  return `<img src="${escapeAttr(p.img)}" alt="${escapeAttr(p.name)}" data-cat="${p.cat}" decoding="async" />`;
+  const src = escapeAttr(p.img), name = escapeAttr(p.name);
+  return queued
+    ? `<img alt="" data-src="${src}" data-name="${name}" data-cat="${p.cat}" decoding="async" />`
+    : `<img src="${src}" alt="${name}" data-cat="${p.cat}" decoding="async" />`;
 }
 
-// Si una imagen no carga (archivo faltante o ruta mal escrita), se muestra el ícono
+// Descarga las fotos del catálogo por turnos: primero las 4 que se ven al abrir la página y
+// luego el resto. Si todas se pidieran a la vez, compartirían la conexión y ninguna
+// terminaría hasta el final (en ese caso parece que las fotos "esperan" a que hagas clic).
+function loadImagesInOrder(root, firstBatch = 4) {
+  const imgs = [...root.querySelectorAll("img[data-src]")];
+  const start = (img) => new Promise((done) => {
+    if (!img.isConnected) return done();            // el catálogo ya se volvió a dibujar
+    img.addEventListener("load", done, { once: true });
+    img.addEventListener("error", done, { once: true });
+    img.alt = img.dataset.name || "";
+    img.src = img.dataset.src;
+  });
+  const firstRow = Promise.all(imgs.slice(0, firstBatch).map(start));
+  const timeout = new Promise((done) => setTimeout(done, 6000)); // por si alguna se queda colgada
+  Promise.race([firstRow, timeout]).then(() => imgs.slice(firstBatch).forEach(start));
+}
+
+// Si una imagen no carga, reintenta una vez; si vuelve a fallar (archivo faltante o
+// ruta mal escrita), se muestra el ícono de la categoría
 document.addEventListener("error", (e) => {
   const img = e.target;
-  if (img && img.tagName === "IMG" && img.dataset.cat) {
-    img.insertAdjacentHTML("afterend", ICONS[img.dataset.cat] || "");
-    img.remove();
+  if (!img || img.tagName !== "IMG" || !img.dataset.cat) return;
+  if (!img.dataset.retry) {
+    img.dataset.retry = "1";
+    const src = img.getAttribute("src");
+    img.src = src + (src.includes("?") ? "&" : "?") + "r=" + Date.now();
+    return;
   }
+  img.insertAdjacentHTML("afterend", ICONS[img.dataset.cat] || "");
+  img.remove();
 }, true);
 
 // Estado del carrito (se guarda en localStorage)
@@ -71,7 +98,7 @@ function renderProducts(filter = "todos") {
     <article class="card">
       <div class="card__media" style="background:${p.tone}">
         ${p.badge ? `<span class="card__badge">${p.badge}</span>` : ""}
-        ${mediaHTML(p)}
+        ${mediaHTML(p, true)}
       </div>
       <div class="card__body">
         <span class="card__cat">${CAT_LABEL[p.cat]}</span>
@@ -81,6 +108,7 @@ function renderProducts(filter = "todos") {
       </div>
     </article>
   `).join("");
+  loadImagesInOrder(grid);
 }
 
 function setFilter(filter) {
